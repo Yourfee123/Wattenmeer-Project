@@ -1,0 +1,2710 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css"><link rel="stylesheet" href="css/L.Control.Locate.min.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="css/leaflet-control-geocoder.Geocoder.css">
+        <link rel="stylesheet" href="css/leaflet-measure.css">
+        <style>
+        #map {
+            width: 1402px;
+            height: 837px;
+        }
+        </style>
+        <title>       Joint Research Project of the Wadden Sea National park in Germany and The Gambia</title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script><script src="js/L.Control.Locate.min.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="js/leaflet-control-geocoder.Geocoder.js"></script>
+        <script src="js/leaflet-measure.js"></script>
+        <script src="data/Gambia_1.js"></script>
+        <script src="data/Tunku_2.js"></script>
+        <script src="data/Tujereng_3.js"></script>
+        <script src="data/TendabaAirport_4.js"></script>
+        <script src="data/TangiRiverMouth_5.js"></script>
+        <script src="data/Pirangswamp_6.js"></script>
+        <script src="data/Salikenni_7.js"></script>
+        <script src="data/Sanyang_8.js"></script>
+        <script src="data/SomaSwamp_9.js"></script>
+        <script src="data/PinyalSwamp_10.js"></script>
+        <script src="data/Panchangswamp_11.js"></script>
+        <script src="data/NyakoiKerewan_12.js"></script>
+        <script src="data/LagunaBeach_13.js"></script>
+        <script src="data/Laibeh_14.js"></script>
+        <script src="data/DalabaSwamp_15.js"></script>
+        <script src="data/LaminRiceField_16.js"></script>
+        <script src="data/Kudangswamp_17.js"></script>
+        <script src="data/KotuCreek_18.js"></script>
+        <script src="data/KintehKunda_19.js"></script>
+        <script src="data/Kerrsaltwetland_20.js"></script>
+        <script src="data/BarraLandingsite_21.js"></script>
+        <script src="data/BijolIslands_22.js"></script>
+        <script src="data/BolongFenyo_23.js"></script>
+        <script src="data/BondRoad_24.js"></script>
+        <script src="data/Brikamaba_25.js"></script>
+        <script src="data/BrufutNemaFlat_26.js"></script>
+        <script src="data/CapepointRoad_27.js"></script>
+        <script src="data/EssauLandingSite_28.js"></script>
+        <script src="data/JahallyRiceField_29.js"></script>
+        <script src="data/Jajari_30.js"></script>
+        <script src="data/KaurSwamp_31.js"></script>
+        <script src="data/KartongQuarry_32.js"></script>
+        <script>
+        var highlightLayer;
+        function highlightFeature(e) {
+            highlightLayer = e.target;
+
+            if (e.target.feature.geometry.type === 'LineString') {
+              highlightLayer.setStyle({
+                color: '#ffff00',
+              });
+            } else {
+              highlightLayer.setStyle({
+                fillColor: '#ffff00',
+                fillOpacity: 1
+              });
+            }
+            highlightLayer.openPopup();
+        }
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        }).fitBounds([[12.067622229683364,-17.826048531134905],[14.362627024029782,-13.978136301093006]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        L.control.locate({locateOptions: {maxZoom: 19}}).addTo(map);
+        var measureControl = new L.Control.Measure({
+            position: 'topleft',
+            primaryLengthUnit: 'meters',
+            secondaryLengthUnit: 'kilometers',
+            primaryAreaUnit: 'sqmeters',
+            secondaryAreaUnit: 'hectares'
+        });
+        measureControl.addTo(map);
+        document.getElementsByClassName('leaflet-control-measure-toggle')[0]
+        .innerHTML = '';
+        document.getElementsByClassName('leaflet-control-measure-toggle')[0]
+        .className += ' fas fa-ruler';
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+            map.setMaxBounds(map.getBounds());
+        }
+        map.createPane('pane_GoogleSatellite_0');
+        map.getPane('pane_GoogleSatellite_0').style.zIndex = 400;
+        var layer_GoogleSatellite_0 = L.tileLayer('https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
+            pane: 'pane_GoogleSatellite_0',
+            opacity: 1.0,
+            attribution: '',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 22
+        });
+        layer_GoogleSatellite_0;
+        map.addLayer(layer_GoogleSatellite_0);
+        function pop_Gambia_1(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_Gambia_1_0() {
+            return {
+                pane: 'pane_Gambia_1',
+                opacity: 1,
+                color: 'rgba(228,26,28,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 4.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Gambia_1');
+        map.getPane('pane_Gambia_1').style.zIndex = 401;
+        map.getPane('pane_Gambia_1').style['mix-blend-mode'] = 'normal';
+        var layer_Gambia_1 = new L.geoJson(json_Gambia_1, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Gambia_1',
+            layerName: 'layer_Gambia_1',
+            pane: 'pane_Gambia_1',
+            onEachFeature: pop_Gambia_1,
+            style: style_Gambia_1_0,
+        });
+        bounds_group.addLayer(layer_Gambia_1);
+        map.addLayer(layer_Gambia_1);
+        function pop_Tunku_2(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Tunku</th>\
+                        <td>' + (feature.properties['Name'] !== null ? autolinker.link(feature.properties['Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Total B ird Species Count : 19037</th>\
+                        <td>' + (feature.properties['description'] !== null ? autolinker.link(feature.properties['description'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">icon</th>\
+                        <td>' + (feature.properties['icon'] !== null ? autolinker.link(feature.properties['icon'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Tunku_2_0() {
+            return {
+                pane: 'pane_Tunku_2',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(243,166,178,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Tunku_2');
+        map.getPane('pane_Tunku_2').style.zIndex = 402;
+        map.getPane('pane_Tunku_2').style['mix-blend-mode'] = 'normal';
+        var layer_Tunku_2 = new L.geoJson(json_Tunku_2, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Tunku_2',
+            layerName: 'layer_Tunku_2',
+            pane: 'pane_Tunku_2',
+            onEachFeature: pop_Tunku_2,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_Tunku_2_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_Tunku_2);
+        map.addLayer(layer_Tunku_2);
+        function pop_Tujereng_3(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Tujereng</th>\
+                        <td>' + (feature.properties['Name'] !== null ? autolinker.link(feature.properties['Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Total B ird Species Count :1211</th>\
+                        <td>' + (feature.properties['description'] !== null ? autolinker.link(feature.properties['description'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">tessellate</th>\
+                        <td>' + (feature.properties['tessellate'] !== null ? autolinker.link(feature.properties['tessellate'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Tujereng_3_0() {
+            return {
+                pane: 'pane_Tujereng_3',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(183,72,75,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Tujereng_3');
+        map.getPane('pane_Tujereng_3').style.zIndex = 403;
+        map.getPane('pane_Tujereng_3').style['mix-blend-mode'] = 'normal';
+        var layer_Tujereng_3 = new L.geoJson(json_Tujereng_3, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Tujereng_3',
+            layerName: 'layer_Tujereng_3',
+            pane: 'pane_Tujereng_3',
+            onEachFeature: pop_Tujereng_3,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_Tujereng_3_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_Tujereng_3);
+        map.addLayer(layer_Tujereng_3);
+        function pop_TendabaAirport_4(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Tendaba Airport</th>\
+                        <td>' + (feature.properties['Name'] !== null ? autolinker.link(feature.properties['Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Total B ird Species Count :1622</th>\
+                        <td>' + (feature.properties['description'] !== null ? autolinker.link(feature.properties['description'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">end</th>\
+                        <td>' + (feature.properties['end'] !== null ? autolinker.link(feature.properties['end'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_TendabaAirport_4_0() {
+            return {
+                pane: 'pane_TendabaAirport_4',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(152,125,183,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_TendabaAirport_4');
+        map.getPane('pane_TendabaAirport_4').style.zIndex = 404;
+        map.getPane('pane_TendabaAirport_4').style['mix-blend-mode'] = 'normal';
+        var layer_TendabaAirport_4 = new L.geoJson(json_TendabaAirport_4, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_TendabaAirport_4',
+            layerName: 'layer_TendabaAirport_4',
+            pane: 'pane_TendabaAirport_4',
+            onEachFeature: pop_TendabaAirport_4,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_TendabaAirport_4_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_TendabaAirport_4);
+        map.addLayer(layer_TendabaAirport_4);
+        function pop_TangiRiverMouth_5(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Tanji River Mouth</th>\
+                        <td>' + (feature.properties['Name'] !== null ? autolinker.link(feature.properties['Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Total B ird Species Count :18263</th>\
+                        <td>' + (feature.properties['description'] !== null ? autolinker.link(feature.properties['description'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">timestamp</th>\
+                        <td>' + (feature.properties['timestamp'] !== null ? autolinker.link(feature.properties['timestamp'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">begin</th>\
+                        <td>' + (feature.properties['begin'] !== null ? autolinker.link(feature.properties['begin'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">end</th>\
+                        <td>' + (feature.properties['end'] !== null ? autolinker.link(feature.properties['end'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">altitudeMode</th>\
+                        <td>' + (feature.properties['altitudeMode'] !== null ? autolinker.link(feature.properties['altitudeMode'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">tessellate</th>\
+                        <td>' + (feature.properties['tessellate'] !== null ? autolinker.link(feature.properties['tessellate'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">extrude</th>\
+                        <td>' + (feature.properties['extrude'] !== null ? autolinker.link(feature.properties['extrude'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">visibility</th>\
+                        <td>' + (feature.properties['visibility'] !== null ? autolinker.link(feature.properties['visibility'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">drawOrder</th>\
+                        <td>' + (feature.properties['drawOrder'] !== null ? autolinker.link(feature.properties['drawOrder'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">icon</th>\
+                        <td>' + (feature.properties['icon'] !== null ? autolinker.link(feature.properties['icon'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_TangiRiverMouth_5_0() {
+            return {
+                pane: 'pane_TangiRiverMouth_5',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(225,89,137,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_TangiRiverMouth_5');
+        map.getPane('pane_TangiRiverMouth_5').style.zIndex = 405;
+        map.getPane('pane_TangiRiverMouth_5').style['mix-blend-mode'] = 'normal';
+        var layer_TangiRiverMouth_5 = new L.geoJson(json_TangiRiverMouth_5, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_TangiRiverMouth_5',
+            layerName: 'layer_TangiRiverMouth_5',
+            pane: 'pane_TangiRiverMouth_5',
+            onEachFeature: pop_TangiRiverMouth_5,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_TangiRiverMouth_5_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_TangiRiverMouth_5);
+        map.addLayer(layer_TangiRiverMouth_5);
+        function pop_Pirangswamp_6(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Pirang Swamp</th>\
+                        <td>' + (feature.properties['Name'] !== null ? autolinker.link(feature.properties['Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Total B ird Species Count :10011</th>\
+                        <td>' + (feature.properties['description'] !== null ? autolinker.link(feature.properties['description'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Pirangswamp_6_0() {
+            return {
+                pane: 'pane_Pirangswamp_6',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(196,60,57,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Pirangswamp_6');
+        map.getPane('pane_Pirangswamp_6').style.zIndex = 406;
+        map.getPane('pane_Pirangswamp_6').style['mix-blend-mode'] = 'normal';
+        var layer_Pirangswamp_6 = new L.geoJson(json_Pirangswamp_6, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Pirangswamp_6',
+            layerName: 'layer_Pirangswamp_6',
+            pane: 'pane_Pirangswamp_6',
+            onEachFeature: pop_Pirangswamp_6,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_Pirangswamp_6_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_Pirangswamp_6);
+        map.addLayer(layer_Pirangswamp_6);
+        function pop_Salikenni_7(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Salikenni</th>\
+                        <td>' + (feature.properties['Name'] !== null ? autolinker.link(feature.properties['Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Total B ird Species Count :190</th>\
+                        <td>' + (feature.properties['description'] !== null ? autolinker.link(feature.properties['description'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Salikenni_7_0() {
+            return {
+                pane: 'pane_Salikenni_7',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(145,82,45,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Salikenni_7');
+        map.getPane('pane_Salikenni_7').style.zIndex = 407;
+        map.getPane('pane_Salikenni_7').style['mix-blend-mode'] = 'normal';
+        var layer_Salikenni_7 = new L.geoJson(json_Salikenni_7, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Salikenni_7',
+            layerName: 'layer_Salikenni_7',
+            pane: 'pane_Salikenni_7',
+            onEachFeature: pop_Salikenni_7,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_Salikenni_7_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_Salikenni_7);
+        map.addLayer(layer_Salikenni_7);
+        function pop_Sanyang_8(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Sanyang Swamp</th>\
+                        <td>' + (feature.properties['Name'] !== null ? autolinker.link(feature.properties['Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Total B ird Species Count :1851</th>\
+                        <td>' + (feature.properties['description'] !== null ? autolinker.link(feature.properties['description'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Sanyang_8_0() {
+            return {
+                pane: 'pane_Sanyang_8',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(133,182,111,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Sanyang_8');
+        map.getPane('pane_Sanyang_8').style.zIndex = 408;
+        map.getPane('pane_Sanyang_8').style['mix-blend-mode'] = 'normal';
+        var layer_Sanyang_8 = new L.geoJson(json_Sanyang_8, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Sanyang_8',
+            layerName: 'layer_Sanyang_8',
+            pane: 'pane_Sanyang_8',
+            onEachFeature: pop_Sanyang_8,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_Sanyang_8_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_Sanyang_8);
+        map.addLayer(layer_Sanyang_8);
+        function pop_SomaSwamp_9(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Soma Swamp</th>\
+                        <td>' + (feature.properties['Name'] !== null ? autolinker.link(feature.properties['Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_SomaSwamp_9_0() {
+            return {
+                pane: 'pane_SomaSwamp_9',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(213,180,60,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_SomaSwamp_9');
+        map.getPane('pane_SomaSwamp_9').style.zIndex = 409;
+        map.getPane('pane_SomaSwamp_9').style['mix-blend-mode'] = 'normal';
+        var layer_SomaSwamp_9 = new L.geoJson(json_SomaSwamp_9, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_SomaSwamp_9',
+            layerName: 'layer_SomaSwamp_9',
+            pane: 'pane_SomaSwamp_9',
+            onEachFeature: pop_SomaSwamp_9,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_SomaSwamp_9_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_SomaSwamp_9);
+        map.addLayer(layer_SomaSwamp_9);
+        function pop_PinyalSwamp_10(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Pinyal Swamp</th>\
+                        <td>' + (feature.properties['Name'] !== null ? autolinker.link(feature.properties['Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Total B ird Species Count :37</th>\
+                        <td>' + (feature.properties['description'] !== null ? autolinker.link(feature.properties['description'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_PinyalSwamp_10_0() {
+            return {
+                pane: 'pane_PinyalSwamp_10',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(232,113,141,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_PinyalSwamp_10');
+        map.getPane('pane_PinyalSwamp_10').style.zIndex = 410;
+        map.getPane('pane_PinyalSwamp_10').style['mix-blend-mode'] = 'normal';
+        var layer_PinyalSwamp_10 = new L.geoJson(json_PinyalSwamp_10, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_PinyalSwamp_10',
+            layerName: 'layer_PinyalSwamp_10',
+            pane: 'pane_PinyalSwamp_10',
+            onEachFeature: pop_PinyalSwamp_10,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_PinyalSwamp_10_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_PinyalSwamp_10);
+        map.addLayer(layer_PinyalSwamp_10);
+        function pop_Panchangswamp_11(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Panchang Swamp</th>\
+                        <td>' + (feature.properties['Name'] !== null ? autolinker.link(feature.properties['Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Total B ird Species Count :3914</th>\
+                        <td>' + (feature.properties['description'] !== null ? autolinker.link(feature.properties['description'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Panchangswamp_11_0() {
+            return {
+                pane: 'pane_Panchangswamp_11',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(152,125,183,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Panchangswamp_11');
+        map.getPane('pane_Panchangswamp_11').style.zIndex = 411;
+        map.getPane('pane_Panchangswamp_11').style['mix-blend-mode'] = 'normal';
+        var layer_Panchangswamp_11 = new L.geoJson(json_Panchangswamp_11, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Panchangswamp_11',
+            layerName: 'layer_Panchangswamp_11',
+            pane: 'pane_Panchangswamp_11',
+            onEachFeature: pop_Panchangswamp_11,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_Panchangswamp_11_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_Panchangswamp_11);
+        map.addLayer(layer_Panchangswamp_11);
+        function pop_NyakoiKerewan_12(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Nyakoi Kerewan</th>\
+                        <td>' + (feature.properties['Name'] !== null ? autolinker.link(feature.properties['Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Total B ird Species Count :4536</th>\
+                        <td>' + (feature.properties['description'] !== null ? autolinker.link(feature.properties['description'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_NyakoiKerewan_12_0() {
+            return {
+                pane: 'pane_NyakoiKerewan_12',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(196,60,57,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_NyakoiKerewan_12');
+        map.getPane('pane_NyakoiKerewan_12').style.zIndex = 412;
+        map.getPane('pane_NyakoiKerewan_12').style['mix-blend-mode'] = 'normal';
+        var layer_NyakoiKerewan_12 = new L.geoJson(json_NyakoiKerewan_12, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_NyakoiKerewan_12',
+            layerName: 'layer_NyakoiKerewan_12',
+            pane: 'pane_NyakoiKerewan_12',
+            onEachFeature: pop_NyakoiKerewan_12,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_NyakoiKerewan_12_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_NyakoiKerewan_12);
+        map.addLayer(layer_NyakoiKerewan_12);
+        function pop_LagunaBeach_13(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Laguna Beach</th>\
+                        <td>' + (feature.properties['Name'] !== null ? autolinker.link(feature.properties['Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Total Bird Species Count:3143</th>\
+                        <td>' + (feature.properties['description'] !== null ? autolinker.link(feature.properties['description'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_LagunaBeach_13_0() {
+            return {
+                pane: 'pane_LagunaBeach_13',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(145,82,45,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_LagunaBeach_13');
+        map.getPane('pane_LagunaBeach_13').style.zIndex = 413;
+        map.getPane('pane_LagunaBeach_13').style['mix-blend-mode'] = 'normal';
+        var layer_LagunaBeach_13 = new L.geoJson(json_LagunaBeach_13, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_LagunaBeach_13',
+            layerName: 'layer_LagunaBeach_13',
+            pane: 'pane_LagunaBeach_13',
+            onEachFeature: pop_LagunaBeach_13,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_LagunaBeach_13_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_LagunaBeach_13);
+        map.addLayer(layer_LagunaBeach_13);
+        function pop_Laibeh_14(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Laibeh Nyara</th>\
+                        <td>' + (feature.properties['Name'] !== null ? autolinker.link(feature.properties['Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Total Bird Count :4847</th>\
+                        <td>' + (feature.properties['description'] !== null ? autolinker.link(feature.properties['description'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Laibeh_14_0() {
+            return {
+                pane: 'pane_Laibeh_14',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(133,182,111,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Laibeh_14');
+        map.getPane('pane_Laibeh_14').style.zIndex = 414;
+        map.getPane('pane_Laibeh_14').style['mix-blend-mode'] = 'normal';
+        var layer_Laibeh_14 = new L.geoJson(json_Laibeh_14, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Laibeh_14',
+            layerName: 'layer_Laibeh_14',
+            pane: 'pane_Laibeh_14',
+            onEachFeature: pop_Laibeh_14,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_Laibeh_14_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_Laibeh_14);
+        map.addLayer(layer_Laibeh_14);
+        function pop_DalabaSwamp_15(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Dalaba swamp</th>\
+                        <td>' + (feature.properties['Name'] !== null ? autolinker.link(feature.properties['Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Total Bird Species Count:13519</th>\
+                        <td>' + (feature.properties['description'] !== null ? autolinker.link(feature.properties['description'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_DalabaSwamp_15_0() {
+            return {
+                pane: 'pane_DalabaSwamp_15',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(213,180,60,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_DalabaSwamp_15');
+        map.getPane('pane_DalabaSwamp_15').style.zIndex = 415;
+        map.getPane('pane_DalabaSwamp_15').style['mix-blend-mode'] = 'normal';
+        var layer_DalabaSwamp_15 = new L.geoJson(json_DalabaSwamp_15, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_DalabaSwamp_15',
+            layerName: 'layer_DalabaSwamp_15',
+            pane: 'pane_DalabaSwamp_15',
+            onEachFeature: pop_DalabaSwamp_15,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_DalabaSwamp_15_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_DalabaSwamp_15);
+        map.addLayer(layer_DalabaSwamp_15);
+        function pop_LaminRiceField_16(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Lamin Rice field</th>\
+                        <td>' + (feature.properties['Name'] !== null ? autolinker.link(feature.properties['Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Total Bird species count: 88</th>\
+                        <td>' + (feature.properties['description'] !== null ? autolinker.link(feature.properties['description'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_LaminRiceField_16_0() {
+            return {
+                pane: 'pane_LaminRiceField_16',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(243,166,178,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_LaminRiceField_16');
+        map.getPane('pane_LaminRiceField_16').style.zIndex = 416;
+        map.getPane('pane_LaminRiceField_16').style['mix-blend-mode'] = 'normal';
+        var layer_LaminRiceField_16 = new L.geoJson(json_LaminRiceField_16, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_LaminRiceField_16',
+            layerName: 'layer_LaminRiceField_16',
+            pane: 'pane_LaminRiceField_16',
+            onEachFeature: pop_LaminRiceField_16,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_LaminRiceField_16_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_LaminRiceField_16);
+        map.addLayer(layer_LaminRiceField_16);
+        function pop_Kudangswamp_17(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Kudang Swamp</th>\
+                        <td>' + (feature.properties['Name'] !== null ? autolinker.link(feature.properties['Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Total Bird Species Count:1204</th>\
+                        <td>' + (feature.properties['description'] !== null ? autolinker.link(feature.properties['description'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Kudangswamp_17_0() {
+            return {
+                pane: 'pane_Kudangswamp_17',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(232,113,141,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Kudangswamp_17');
+        map.getPane('pane_Kudangswamp_17').style.zIndex = 417;
+        map.getPane('pane_Kudangswamp_17').style['mix-blend-mode'] = 'normal';
+        var layer_Kudangswamp_17 = new L.geoJson(json_Kudangswamp_17, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Kudangswamp_17',
+            layerName: 'layer_Kudangswamp_17',
+            pane: 'pane_Kudangswamp_17',
+            onEachFeature: pop_Kudangswamp_17,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_Kudangswamp_17_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_Kudangswamp_17);
+        map.addLayer(layer_Kudangswamp_17);
+        function pop_KotuCreek_18(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Kotu Creek</th>\
+                        <td>' + (feature.properties['Name'] !== null ? autolinker.link(feature.properties['Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Total Bird Species Count:4847</th>\
+                        <td>' + (feature.properties['description'] !== null ? autolinker.link(feature.properties['description'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_KotuCreek_18_0() {
+            return {
+                pane: 'pane_KotuCreek_18',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(183,72,75,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_KotuCreek_18');
+        map.getPane('pane_KotuCreek_18').style.zIndex = 418;
+        map.getPane('pane_KotuCreek_18').style['mix-blend-mode'] = 'normal';
+        var layer_KotuCreek_18 = new L.geoJson(json_KotuCreek_18, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_KotuCreek_18',
+            layerName: 'layer_KotuCreek_18',
+            pane: 'pane_KotuCreek_18',
+            onEachFeature: pop_KotuCreek_18,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_KotuCreek_18_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_KotuCreek_18);
+        map.addLayer(layer_KotuCreek_18);
+        function pop_KintehKunda_19(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Kinteh Kunda</th>\
+                        <td>' + (feature.properties['Name'] !== null ? autolinker.link(feature.properties['Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Total Bird species Count: 6315</th>\
+                        <td>' + (feature.properties['description'] !== null ? autolinker.link(feature.properties['description'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">icon</th>\
+                        <td>' + (feature.properties['icon'] !== null ? autolinker.link(feature.properties['icon'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_KintehKunda_19_0() {
+            return {
+                pane: 'pane_KintehKunda_19',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(152,125,183,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_KintehKunda_19');
+        map.getPane('pane_KintehKunda_19').style.zIndex = 419;
+        map.getPane('pane_KintehKunda_19').style['mix-blend-mode'] = 'normal';
+        var layer_KintehKunda_19 = new L.geoJson(json_KintehKunda_19, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_KintehKunda_19',
+            layerName: 'layer_KintehKunda_19',
+            pane: 'pane_KintehKunda_19',
+            onEachFeature: pop_KintehKunda_19,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_KintehKunda_19_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_KintehKunda_19);
+        map.addLayer(layer_KintehKunda_19);
+        function pop_Kerrsaltwetland_20(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Ker Salt Wetland</th>\
+                        <td>' + (feature.properties['Name'] !== null ? autolinker.link(feature.properties['Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Kerrsaltwetland_20_0() {
+            return {
+                pane: 'pane_Kerrsaltwetland_20',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(225,89,137,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Kerrsaltwetland_20');
+        map.getPane('pane_Kerrsaltwetland_20').style.zIndex = 420;
+        map.getPane('pane_Kerrsaltwetland_20').style['mix-blend-mode'] = 'normal';
+        var layer_Kerrsaltwetland_20 = new L.geoJson(json_Kerrsaltwetland_20, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Kerrsaltwetland_20',
+            layerName: 'layer_Kerrsaltwetland_20',
+            pane: 'pane_Kerrsaltwetland_20',
+            onEachFeature: pop_Kerrsaltwetland_20,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_Kerrsaltwetland_20_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_Kerrsaltwetland_20);
+        map.addLayer(layer_Kerrsaltwetland_20);
+        function pop_BarraLandingsite_21(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Barra Landing Site</th>\
+                        <td>' + (feature.properties['Name'] !== null ? autolinker.link(feature.properties['Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Total Count:1299</th>\
+                        <td>' + (feature.properties['description'] !== null ? autolinker.link(feature.properties['description'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_BarraLandingsite_21_0() {
+            return {
+                pane: 'pane_BarraLandingsite_21',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(152,125,183,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_BarraLandingsite_21');
+        map.getPane('pane_BarraLandingsite_21').style.zIndex = 421;
+        map.getPane('pane_BarraLandingsite_21').style['mix-blend-mode'] = 'normal';
+        var layer_BarraLandingsite_21 = new L.geoJson(json_BarraLandingsite_21, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_BarraLandingsite_21',
+            layerName: 'layer_BarraLandingsite_21',
+            pane: 'pane_BarraLandingsite_21',
+            onEachFeature: pop_BarraLandingsite_21,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_BarraLandingsite_21_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_BarraLandingsite_21);
+        map.addLayer(layer_BarraLandingsite_21);
+        function pop_BijolIslands_22(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Bijol Islands</th>\
+                        <td>' + (feature.properties['Name'] !== null ? autolinker.link(feature.properties['Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Total Count:4163</th>\
+                        <td>' + (feature.properties['description'] !== null ? autolinker.link(feature.properties['description'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_BijolIslands_22_0() {
+            return {
+                pane: 'pane_BijolIslands_22',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(183,72,75,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_BijolIslands_22');
+        map.getPane('pane_BijolIslands_22').style.zIndex = 422;
+        map.getPane('pane_BijolIslands_22').style['mix-blend-mode'] = 'normal';
+        var layer_BijolIslands_22 = new L.geoJson(json_BijolIslands_22, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_BijolIslands_22',
+            layerName: 'layer_BijolIslands_22',
+            pane: 'pane_BijolIslands_22',
+            onEachFeature: pop_BijolIslands_22,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_BijolIslands_22_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_BijolIslands_22);
+        map.addLayer(layer_BijolIslands_22);
+        function pop_BolongFenyo_23(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Bolong Fenyo</th>\
+                        <td>' + (feature.properties['Name'] !== null ? autolinker.link(feature.properties['Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Total Count: 22992</th>\
+                        <td>' + (feature.properties['description'] !== null ? autolinker.link(feature.properties['description'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">visibility</th>\
+                        <td>' + (feature.properties['visibility'] !== null ? autolinker.link(feature.properties['visibility'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_BolongFenyo_23_0() {
+            return {
+                pane: 'pane_BolongFenyo_23',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(232,113,141,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_BolongFenyo_23');
+        map.getPane('pane_BolongFenyo_23').style.zIndex = 423;
+        map.getPane('pane_BolongFenyo_23').style['mix-blend-mode'] = 'normal';
+        var layer_BolongFenyo_23 = new L.geoJson(json_BolongFenyo_23, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_BolongFenyo_23',
+            layerName: 'layer_BolongFenyo_23',
+            pane: 'pane_BolongFenyo_23',
+            onEachFeature: pop_BolongFenyo_23,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_BolongFenyo_23_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_BolongFenyo_23);
+        map.addLayer(layer_BolongFenyo_23);
+        function pop_BondRoad_24(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Bond Road</th>\
+                        <td>' + (feature.properties['Name'] !== null ? autolinker.link(feature.properties['Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Total Count:27752</th>\
+                        <td>' + (feature.properties['description'] !== null ? autolinker.link(feature.properties['description'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">icon</th>\
+                        <td>' + (feature.properties['icon'] !== null ? autolinker.link(feature.properties['icon'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_BondRoad_24_0() {
+            return {
+                pane: 'pane_BondRoad_24',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(243,166,178,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_BondRoad_24');
+        map.getPane('pane_BondRoad_24').style.zIndex = 424;
+        map.getPane('pane_BondRoad_24').style['mix-blend-mode'] = 'normal';
+        var layer_BondRoad_24 = new L.geoJson(json_BondRoad_24, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_BondRoad_24',
+            layerName: 'layer_BondRoad_24',
+            pane: 'pane_BondRoad_24',
+            onEachFeature: pop_BondRoad_24,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_BondRoad_24_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_BondRoad_24);
+        map.addLayer(layer_BondRoad_24);
+        function pop_Brikamaba_25(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Brikamaba</th>\
+                        <td>' + (feature.properties['Name'] !== null ? autolinker.link(feature.properties['Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Total Count:2701</th>\
+                        <td>' + (feature.properties['description'] !== null ? autolinker.link(feature.properties['description'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Brikamaba_25_0() {
+            return {
+                pane: 'pane_Brikamaba_25',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(213,180,60,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Brikamaba_25');
+        map.getPane('pane_Brikamaba_25').style.zIndex = 425;
+        map.getPane('pane_Brikamaba_25').style['mix-blend-mode'] = 'normal';
+        var layer_Brikamaba_25 = new L.geoJson(json_Brikamaba_25, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Brikamaba_25',
+            layerName: 'layer_Brikamaba_25',
+            pane: 'pane_Brikamaba_25',
+            onEachFeature: pop_Brikamaba_25,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_Brikamaba_25_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_Brikamaba_25);
+        map.addLayer(layer_Brikamaba_25);
+        function pop_BrufutNemaFlat_26(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Brufut Nema Flat</th>\
+                        <td>' + (feature.properties['Name'] !== null ? autolinker.link(feature.properties['Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Total Count:9081</th>\
+                        <td>' + (feature.properties['description'] !== null ? autolinker.link(feature.properties['description'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">icon</th>\
+                        <td>' + (feature.properties['icon'] !== null ? autolinker.link(feature.properties['icon'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_BrufutNemaFlat_26_0() {
+            return {
+                pane: 'pane_BrufutNemaFlat_26',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(133,182,111,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_BrufutNemaFlat_26');
+        map.getPane('pane_BrufutNemaFlat_26').style.zIndex = 426;
+        map.getPane('pane_BrufutNemaFlat_26').style['mix-blend-mode'] = 'normal';
+        var layer_BrufutNemaFlat_26 = new L.geoJson(json_BrufutNemaFlat_26, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_BrufutNemaFlat_26',
+            layerName: 'layer_BrufutNemaFlat_26',
+            pane: 'pane_BrufutNemaFlat_26',
+            onEachFeature: pop_BrufutNemaFlat_26,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_BrufutNemaFlat_26_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_BrufutNemaFlat_26);
+        map.addLayer(layer_BrufutNemaFlat_26);
+        function pop_CapepointRoad_27(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Cape Point road</th>\
+                        <td>' + (feature.properties['Name'] !== null ? autolinker.link(feature.properties['Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Total Count:5700</th>\
+                        <td>' + (feature.properties['description'] !== null ? autolinker.link(feature.properties['description'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_CapepointRoad_27_0() {
+            return {
+                pane: 'pane_CapepointRoad_27',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(145,82,45,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_CapepointRoad_27');
+        map.getPane('pane_CapepointRoad_27').style.zIndex = 427;
+        map.getPane('pane_CapepointRoad_27').style['mix-blend-mode'] = 'normal';
+        var layer_CapepointRoad_27 = new L.geoJson(json_CapepointRoad_27, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_CapepointRoad_27',
+            layerName: 'layer_CapepointRoad_27',
+            pane: 'pane_CapepointRoad_27',
+            onEachFeature: pop_CapepointRoad_27,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_CapepointRoad_27_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_CapepointRoad_27);
+        map.addLayer(layer_CapepointRoad_27);
+        function pop_EssauLandingSite_28(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Essau Landing Site</th>\
+                        <td>' + (feature.properties['Name'] !== null ? autolinker.link(feature.properties['Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Total Count:3140</th>\
+                        <td>' + (feature.properties['description'] !== null ? autolinker.link(feature.properties['description'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_EssauLandingSite_28_0() {
+            return {
+                pane: 'pane_EssauLandingSite_28',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(225,89,137,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_EssauLandingSite_28');
+        map.getPane('pane_EssauLandingSite_28').style.zIndex = 428;
+        map.getPane('pane_EssauLandingSite_28').style['mix-blend-mode'] = 'normal';
+        var layer_EssauLandingSite_28 = new L.geoJson(json_EssauLandingSite_28, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_EssauLandingSite_28',
+            layerName: 'layer_EssauLandingSite_28',
+            pane: 'pane_EssauLandingSite_28',
+            onEachFeature: pop_EssauLandingSite_28,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_EssauLandingSite_28_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_EssauLandingSite_28);
+        map.addLayer(layer_EssauLandingSite_28);
+        function pop_JahallyRiceField_29(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Jahally Rice field</th>\
+                        <td>' + (feature.properties['Name'] !== null ? autolinker.link(feature.properties['Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Total Count: 27748</th>\
+                        <td>' + (feature.properties['description'] !== null ? autolinker.link(feature.properties['description'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">drawOrder</th>\
+                        <td>' + (feature.properties['drawOrder'] !== null ? autolinker.link(feature.properties['drawOrder'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_JahallyRiceField_29_0() {
+            return {
+                pane: 'pane_JahallyRiceField_29',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(152,125,183,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_JahallyRiceField_29');
+        map.getPane('pane_JahallyRiceField_29').style.zIndex = 429;
+        map.getPane('pane_JahallyRiceField_29').style['mix-blend-mode'] = 'normal';
+        var layer_JahallyRiceField_29 = new L.geoJson(json_JahallyRiceField_29, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_JahallyRiceField_29',
+            layerName: 'layer_JahallyRiceField_29',
+            pane: 'pane_JahallyRiceField_29',
+            onEachFeature: pop_JahallyRiceField_29,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_JahallyRiceField_29_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_JahallyRiceField_29);
+        map.addLayer(layer_JahallyRiceField_29);
+        function pop_Jajari_30(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Jajari</th>\
+                        <td>' + (feature.properties['Name'] !== null ? autolinker.link(feature.properties['Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Total Count: 1218</th>\
+                        <td>' + (feature.properties['description'] !== null ? autolinker.link(feature.properties['description'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Jajari_30_0() {
+            return {
+                pane: 'pane_Jajari_30',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(183,72,75,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Jajari_30');
+        map.getPane('pane_Jajari_30').style.zIndex = 430;
+        map.getPane('pane_Jajari_30').style['mix-blend-mode'] = 'normal';
+        var layer_Jajari_30 = new L.geoJson(json_Jajari_30, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Jajari_30',
+            layerName: 'layer_Jajari_30',
+            pane: 'pane_Jajari_30',
+            onEachFeature: pop_Jajari_30,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_Jajari_30_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_Jajari_30);
+        map.addLayer(layer_Jajari_30);
+        function pop_KaurSwamp_31(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Kaur Swamp</th>\
+                        <td>' + (feature.properties['Name'] !== null ? autolinker.link(feature.properties['Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">icon</th>\
+                        <td>' + (feature.properties['icon'] !== null ? autolinker.link(feature.properties['icon'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_KaurSwamp_31_0() {
+            return {
+                pane: 'pane_KaurSwamp_31',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(232,113,141,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_KaurSwamp_31');
+        map.getPane('pane_KaurSwamp_31').style.zIndex = 431;
+        map.getPane('pane_KaurSwamp_31').style['mix-blend-mode'] = 'normal';
+        var layer_KaurSwamp_31 = new L.geoJson(json_KaurSwamp_31, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_KaurSwamp_31',
+            layerName: 'layer_KaurSwamp_31',
+            pane: 'pane_KaurSwamp_31',
+            onEachFeature: pop_KaurSwamp_31,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_KaurSwamp_31_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_KaurSwamp_31);
+        map.addLayer(layer_KaurSwamp_31);
+        function pop_KartongQuarry_32(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Kartong Quarry</th>\
+                        <td>' + (feature.properties['Name'] !== null ? autolinker.link(feature.properties['Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Total Count:13809</th>\
+                        <td>' + (feature.properties['description'] !== null ? autolinker.link(feature.properties['description'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">icon</th>\
+                        <td>' + (feature.properties['icon'] !== null ? autolinker.link(feature.properties['icon'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_KartongQuarry_32_0() {
+            return {
+                pane: 'pane_KartongQuarry_32',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(243,166,178,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_KartongQuarry_32');
+        map.getPane('pane_KartongQuarry_32').style.zIndex = 432;
+        map.getPane('pane_KartongQuarry_32').style['mix-blend-mode'] = 'normal';
+        var layer_KartongQuarry_32 = new L.geoJson(json_KartongQuarry_32, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_KartongQuarry_32',
+            layerName: 'layer_KartongQuarry_32',
+            pane: 'pane_KartongQuarry_32',
+            onEachFeature: pop_KartongQuarry_32,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_KartongQuarry_32_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_KartongQuarry_32);
+        map.addLayer(layer_KartongQuarry_32);
+            var title = new L.Control();
+            title.onAdd = function (map) {
+                this._div = L.DomUtil.create('div', 'info');
+                this.update();
+                return this._div;
+            };
+            title.update = function () {
+                this._div.innerHTML = '<h2>       Joint Research Project of the Wadden Sea National park in Germany and The Gambia</h2>';
+            };
+            title.addTo(map);
+            var abstract = new L.Control({'position':'topright'});
+            abstract.onAdd = function (map) {
+                this._div = L.DomUtil.create('div',
+                'leaflet-control abstract');
+                this._div.id = 'abstract'
+
+                    abstract.show();
+                    return this._div;
+                };
+                abstract.show = function () {
+                    this._div.classList.remove("abstract");
+                    this._div.classList.add("abstractUncollapsed");
+                    this._div.innerHTML = 'This is a Joint Research Project of the Wadden Sea National park in Germany and The GambiaDepartment of Parks & Wildlife Management (Banjul.The author of this project is Yourfee Kennedy of Eberswalde University for Sustainable Development.';
+            };
+            abstract.addTo(map);
+        var osmGeocoder = new L.Control.Geocoder({
+            collapsed: true,
+            position: 'topleft',
+            text: 'Search',
+            title: 'Testing'
+        }).addTo(map);
+        document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
+        .className += ' fa fa-search';
+        document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
+        .title += 'Search for a place';
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'<img src="legend/KartongQuarry_32.png" /> Kartong Quarry': layer_KartongQuarry_32,'<img src="legend/KaurSwamp_31.png" /> Kaur Swamp': layer_KaurSwamp_31,'<img src="legend/Jajari_30.png" /> Jajari': layer_Jajari_30,'<img src="legend/JahallyRiceField_29.png" /> Jahally Rice Field': layer_JahallyRiceField_29,'<img src="legend/EssauLandingSite_28.png" /> Essau Landing Site': layer_EssauLandingSite_28,'<img src="legend/CapepointRoad_27.png" /> Cape point Road': layer_CapepointRoad_27,'<img src="legend/BrufutNemaFlat_26.png" /> Brufut Nema Flat': layer_BrufutNemaFlat_26,'<img src="legend/Brikamaba_25.png" /> Brikamaba': layer_Brikamaba_25,'<img src="legend/BondRoad_24.png" /> Bond Road': layer_BondRoad_24,'<img src="legend/BolongFenyo_23.png" /> Bolong Fenyo': layer_BolongFenyo_23,'<img src="legend/BijolIslands_22.png" /> Bijol Islands': layer_BijolIslands_22,'<img src="legend/BarraLandingsite_21.png" /> Barra Landing site': layer_BarraLandingsite_21,'<img src="legend/Kerrsaltwetland_20.png" /> Kerr salt wetland': layer_Kerrsaltwetland_20,'<img src="legend/KintehKunda_19.png" /> Kinteh Kunda': layer_KintehKunda_19,'<img src="legend/KotuCreek_18.png" /> Kotu Creek': layer_KotuCreek_18,'<img src="legend/Kudangswamp_17.png" /> Kudang swamp': layer_Kudangswamp_17,'<img src="legend/LaminRiceField_16.png" /> Lamin Rice Field': layer_LaminRiceField_16,'<img src="legend/DalabaSwamp_15.png" /> Dalaba Swamp': layer_DalabaSwamp_15,'<img src="legend/Laibeh_14.png" /> Laibeh': layer_Laibeh_14,'<img src="legend/LagunaBeach_13.png" /> Laguna Beach': layer_LagunaBeach_13,'<img src="legend/NyakoiKerewan_12.png" /> Nyakoi Kerewan': layer_NyakoiKerewan_12,'<img src="legend/Panchangswamp_11.png" /> Panchang swamp': layer_Panchangswamp_11,'<img src="legend/PinyalSwamp_10.png" /> Pinyal Swamp': layer_PinyalSwamp_10,'<img src="legend/SomaSwamp_9.png" /> Soma Swamp': layer_SomaSwamp_9,'<img src="legend/Sanyang_8.png" /> Sanyang': layer_Sanyang_8,'<img src="legend/Salikenni_7.png" /> Salikenni': layer_Salikenni_7,'<img src="legend/Pirangswamp_6.png" /> Pirang swamp': layer_Pirangswamp_6,'<img src="legend/TangiRiverMouth_5.png" /> Tangi River Mouth': layer_TangiRiverMouth_5,'<img src="legend/TendabaAirport_4.png" /> Tendaba Airport': layer_TendabaAirport_4,'<img src="legend/Tujereng_3.png" /> Tujereng': layer_Tujereng_3,'<img src="legend/Tunku_2.png" /> Tunku': layer_Tunku_2,'<img src="legend/Gambia_1.png" /> Gambia': layer_Gambia_1,"Google Satellite": layer_GoogleSatellite_0,}).addTo(map);
+        setBounds();
+        var i = 0;
+        layer_Gambia_1.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['q2wHide_NAME_0'] !== null?String('<div style="color: #000000; font-size: 30pt; font-family: \'MS Shell Dlg 2\', sans-serif;">' + layer.feature.properties['q2wHide_NAME_0']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_Gambia_1'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        var i = 0;
+        layer_Tunku_2.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['Name'] !== null?String('<div style="color: #000000; font-size: 30pt; font-family: \'MS Shell Dlg 2\', sans-serif;">' + layer.feature.properties['Name']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_Tunku_2'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        var i = 0;
+        layer_Tujereng_3.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['Name'] !== null?String('<div style="color: #000000; font-size: 30pt; font-family: \'MS Shell Dlg 2\', sans-serif;">' + layer.feature.properties['Name']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_Tujereng_3'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        var i = 0;
+        layer_TendabaAirport_4.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['Name'] !== null?String('<div style="color: #000000; font-size: 30pt; font-family: \'MS Shell Dlg 2\', sans-serif;">' + layer.feature.properties['Name']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_TendabaAirport_4'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        var i = 0;
+        layer_TangiRiverMouth_5.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['Name'] !== null?String('<div style="color: #000000; font-size: 30pt; font-family: \'MS Shell Dlg 2\', sans-serif;">' + layer.feature.properties['Name']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_TangiRiverMouth_5'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        var i = 0;
+        layer_Pirangswamp_6.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['Name'] !== null?String('<div style="color: #000000; font-size: 30pt; font-family: \'MS Shell Dlg 2\', sans-serif;">' + layer.feature.properties['Name']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_Pirangswamp_6'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        var i = 0;
+        layer_Salikenni_7.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['Name'] !== null?String('<div style="color: #000000; font-size: 30pt; font-family: \'MS Shell Dlg 2\', sans-serif;">' + layer.feature.properties['Name']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_Salikenni_7'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        var i = 0;
+        layer_Sanyang_8.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['Name'] !== null?String('<div style="color: #000000; font-size: 30pt; font-family: \'MS Shell Dlg 2\', sans-serif;">' + layer.feature.properties['Name']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_Sanyang_8'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        var i = 0;
+        layer_SomaSwamp_9.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['Name'] !== null?String('<div style="color: #000000; font-size: 30pt; font-family: \'MS Shell Dlg 2\', sans-serif;">' + layer.feature.properties['Name']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_SomaSwamp_9'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        var i = 0;
+        layer_PinyalSwamp_10.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['Name'] !== null?String('<div style="color: #000000; font-size: 30pt; font-family: \'MS Shell Dlg 2\', sans-serif;">' + layer.feature.properties['Name']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_PinyalSwamp_10'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        var i = 0;
+        layer_Panchangswamp_11.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['Name'] !== null?String('<div style="color: #000000; font-size: 30pt; font-family: \'MS Shell Dlg 2\', sans-serif;">' + layer.feature.properties['Name']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_Panchangswamp_11'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        var i = 0;
+        layer_NyakoiKerewan_12.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['Name'] !== null?String('<div style="color: #000000; font-size: 30pt; font-family: \'MS Shell Dlg 2\', sans-serif;">' + layer.feature.properties['Name']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_NyakoiKerewan_12'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        var i = 0;
+        layer_LagunaBeach_13.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['Name'] !== null?String('<div style="color: #000000; font-size: 30pt; font-family: \'MS Shell Dlg 2\', sans-serif;">' + layer.feature.properties['Name']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_LagunaBeach_13'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        var i = 0;
+        layer_Laibeh_14.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['Name'] !== null?String('<div style="color: #000000; font-size: 30pt; font-family: \'MS Shell Dlg 2\', sans-serif;">' + layer.feature.properties['Name']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_Laibeh_14'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        var i = 0;
+        layer_DalabaSwamp_15.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['Name'] !== null?String('<div style="color: #000000; font-size: 30pt; font-family: \'MS Shell Dlg 2\', sans-serif;">' + layer.feature.properties['Name']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_DalabaSwamp_15'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        var i = 0;
+        layer_LaminRiceField_16.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['Name'] !== null?String('<div style="color: #000000; font-size: 3pt; font-family: \'MS Shell Dlg 2\', sans-serif;">' + layer.feature.properties['Name']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_LaminRiceField_16'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        var i = 0;
+        layer_Kudangswamp_17.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['Name'] !== null?String('<div style="color: #000000; font-size: 30pt; font-family: \'MS Shell Dlg 2\', sans-serif;">' + layer.feature.properties['Name']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_Kudangswamp_17'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        var i = 0;
+        layer_KotuCreek_18.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['Name'] !== null?String('<div style="color: #000000; font-size: 30pt; font-family: \'MS Shell Dlg 2\', sans-serif;">' + layer.feature.properties['Name']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_KotuCreek_18'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        var i = 0;
+        layer_KintehKunda_19.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['Name'] !== null?String('<div style="color: #000000; font-size: 30pt; font-family: \'MS Shell Dlg 2\', sans-serif;">' + layer.feature.properties['Name']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_KintehKunda_19'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        var i = 0;
+        layer_Kerrsaltwetland_20.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['Name'] !== null?String('<div style="color: #000000; font-size: 30pt; font-family: \'MS Shell Dlg 2\', sans-serif;">' + layer.feature.properties['Name']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_Kerrsaltwetland_20'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        var i = 0;
+        layer_BarraLandingsite_21.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['Name'] !== null?String('<div style="color: #000000; font-size: 30pt; font-family: \'MS Shell Dlg 2\', sans-serif;">' + layer.feature.properties['Name']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_BarraLandingsite_21'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        var i = 0;
+        layer_BijolIslands_22.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['Name'] !== null?String('<div style="color: #000000; font-size: 30pt; font-family: \'MS Shell Dlg 2\', sans-serif;">' + layer.feature.properties['Name']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_BijolIslands_22'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        var i = 0;
+        layer_BolongFenyo_23.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['Name'] !== null?String('<div style="color: #000000; font-size: 30pt; font-family: \'MS Shell Dlg 2\', sans-serif;">' + layer.feature.properties['Name']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_BolongFenyo_23'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        var i = 0;
+        layer_BondRoad_24.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['Name'] !== null?String('<div style="color: #000000; font-size: 30pt; font-family: \'MS Shell Dlg 2\', sans-serif;">' + layer.feature.properties['Name']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_BondRoad_24'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        var i = 0;
+        layer_Brikamaba_25.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['Name'] !== null?String('<div style="color: #000000; font-size: 30pt; font-family: \'MS Shell Dlg 2\', sans-serif;">' + layer.feature.properties['Name']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_Brikamaba_25'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        var i = 0;
+        layer_BrufutNemaFlat_26.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['Name'] !== null?String('<div style="color: #000000; font-size: 30pt; font-family: \'MS Shell Dlg 2\', sans-serif;">' + layer.feature.properties['Name']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_BrufutNemaFlat_26'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        var i = 0;
+        layer_CapepointRoad_27.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['Name'] !== null?String('<div style="color: #000000; font-size: 30pt; font-family: \'MS Shell Dlg 2\', sans-serif;">' + layer.feature.properties['Name']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_CapepointRoad_27'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        var i = 0;
+        layer_EssauLandingSite_28.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['Name'] !== null?String('<div style="color: #000000; font-size: 30pt; font-family: \'MS Shell Dlg 2\', sans-serif;">' + layer.feature.properties['Name']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_EssauLandingSite_28'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        var i = 0;
+        layer_JahallyRiceField_29.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['Name'] !== null?String('<div style="color: #000000; font-size: 310pt; font-family: \'MS Shell Dlg 2\', sans-serif;">' + layer.feature.properties['Name']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_JahallyRiceField_29'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        var i = 0;
+        layer_Jajari_30.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['Name'] !== null?String('<div style="color: #000000; font-size: 30pt; font-family: \'MS Shell Dlg 2\', sans-serif;">' + layer.feature.properties['Name']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_Jajari_30'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        var i = 0;
+        layer_KaurSwamp_31.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['Name'] !== null?String('<div style="color: #000000; font-size: 30pt; font-family: \'MS Shell Dlg 2\', sans-serif;">' + layer.feature.properties['Name']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_KaurSwamp_31'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        var i = 0;
+        layer_KartongQuarry_32.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['Name'] !== null?String('<div style="color: #000000; font-size: 30pt; font-family: \'MS Shell Dlg 2\', sans-serif;">' + layer.feature.properties['Name']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_KartongQuarry_32'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        resetLabels([layer_Gambia_1,layer_Tunku_2,layer_Tujereng_3,layer_TendabaAirport_4,layer_TangiRiverMouth_5,layer_Pirangswamp_6,layer_Salikenni_7,layer_Sanyang_8,layer_SomaSwamp_9,layer_PinyalSwamp_10,layer_Panchangswamp_11,layer_NyakoiKerewan_12,layer_LagunaBeach_13,layer_Laibeh_14,layer_DalabaSwamp_15,layer_LaminRiceField_16,layer_Kudangswamp_17,layer_KotuCreek_18,layer_KintehKunda_19,layer_Kerrsaltwetland_20,layer_BarraLandingsite_21,layer_BijolIslands_22,layer_BolongFenyo_23,layer_BondRoad_24,layer_Brikamaba_25,layer_BrufutNemaFlat_26,layer_CapepointRoad_27,layer_EssauLandingSite_28,layer_JahallyRiceField_29,layer_Jajari_30,layer_KaurSwamp_31,layer_KartongQuarry_32]);
+        map.on("zoomend", function(){
+            resetLabels([layer_Gambia_1,layer_Tunku_2,layer_Tujereng_3,layer_TendabaAirport_4,layer_TangiRiverMouth_5,layer_Pirangswamp_6,layer_Salikenni_7,layer_Sanyang_8,layer_SomaSwamp_9,layer_PinyalSwamp_10,layer_Panchangswamp_11,layer_NyakoiKerewan_12,layer_LagunaBeach_13,layer_Laibeh_14,layer_DalabaSwamp_15,layer_LaminRiceField_16,layer_Kudangswamp_17,layer_KotuCreek_18,layer_KintehKunda_19,layer_Kerrsaltwetland_20,layer_BarraLandingsite_21,layer_BijolIslands_22,layer_BolongFenyo_23,layer_BondRoad_24,layer_Brikamaba_25,layer_BrufutNemaFlat_26,layer_CapepointRoad_27,layer_EssauLandingSite_28,layer_JahallyRiceField_29,layer_Jajari_30,layer_KaurSwamp_31,layer_KartongQuarry_32]);
+        });
+        map.on("layeradd", function(){
+            resetLabels([layer_Gambia_1,layer_Tunku_2,layer_Tujereng_3,layer_TendabaAirport_4,layer_TangiRiverMouth_5,layer_Pirangswamp_6,layer_Salikenni_7,layer_Sanyang_8,layer_SomaSwamp_9,layer_PinyalSwamp_10,layer_Panchangswamp_11,layer_NyakoiKerewan_12,layer_LagunaBeach_13,layer_Laibeh_14,layer_DalabaSwamp_15,layer_LaminRiceField_16,layer_Kudangswamp_17,layer_KotuCreek_18,layer_KintehKunda_19,layer_Kerrsaltwetland_20,layer_BarraLandingsite_21,layer_BijolIslands_22,layer_BolongFenyo_23,layer_BondRoad_24,layer_Brikamaba_25,layer_BrufutNemaFlat_26,layer_CapepointRoad_27,layer_EssauLandingSite_28,layer_JahallyRiceField_29,layer_Jajari_30,layer_KaurSwamp_31,layer_KartongQuarry_32]);
+        });
+        map.on("layerremove", function(){
+            resetLabels([layer_Gambia_1,layer_Tunku_2,layer_Tujereng_3,layer_TendabaAirport_4,layer_TangiRiverMouth_5,layer_Pirangswamp_6,layer_Salikenni_7,layer_Sanyang_8,layer_SomaSwamp_9,layer_PinyalSwamp_10,layer_Panchangswamp_11,layer_NyakoiKerewan_12,layer_LagunaBeach_13,layer_Laibeh_14,layer_DalabaSwamp_15,layer_LaminRiceField_16,layer_Kudangswamp_17,layer_KotuCreek_18,layer_KintehKunda_19,layer_Kerrsaltwetland_20,layer_BarraLandingsite_21,layer_BijolIslands_22,layer_BolongFenyo_23,layer_BondRoad_24,layer_Brikamaba_25,layer_BrufutNemaFlat_26,layer_CapepointRoad_27,layer_EssauLandingSite_28,layer_JahallyRiceField_29,layer_Jajari_30,layer_KaurSwamp_31,layer_KartongQuarry_32]);
+        });
+        </script>
+    </body>
+</html>
